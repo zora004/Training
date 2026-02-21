@@ -10,9 +10,14 @@ console.log(myFunction(2, 3)); // 5
 
 const addLogging = (fn) => (args1, args2) => {
   console.log("Entering ", fn.name, " with ", args1, args2);
-  const toReturn = fn(args1, args2);
-  console.log("Exiting ", fn.name, " with ", toReturn);
-  return toReturn;
+  try {
+    const toReturn = fn(args1, args2);
+    console.log("Exiting ", fn.name, " with ", toReturn);
+    return toReturn;
+  } catch (e) {
+    console.error("Error in function", fn.name, e);
+    throw e;
+  }
 };
 
 const sum2 = (a, b) => {
